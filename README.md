@@ -1,4 +1,4 @@
-# Claude-Powered-Chat-Applicatio
+# Claude-Powered-Chat-Application
 
 This document breaks the project into **small, restartable tasks** so it can be executed reliably in **Claude Code** session-by-session. Each task is independent and can be resumed if the session reloads or gets stuck.
 
@@ -18,7 +18,7 @@ Architecture:
 Node.js Frontend → FastAPI Backend → Claude SDK → Claude Model
 ```
 
-##🗂️ Project Folder Structure
+## 🗂️ Project Folder Structure
 ```
 claude-chat-app/
 │
