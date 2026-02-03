@@ -1,292 +1,114 @@
-# Claude-Powered-Chat-Application
+# Claude Chat App
+A full-stack chat application built with **FastAPI** (Backend) and **Node.js/Express** (Frontend). This project has used  **Groq API** , insted of Anthropic Claude API because Groq API is free to use.
 
-This document breaks the project into **small, restartable tasks** so it can be executed reliably in **Claude Code** session-by-session. Each task is independent and can be resumed if the session reloads or gets stuck.
+## 🚀 Features
 
----
+- **High-Speed Inference**: Utilizes Groq's LPU™ Inference Engine for near-instant responses.
+- **Modern Backend**: Built with Python and FastAPI for high performance and easy extensibility.
+- **Simple Frontend**: Lightweight Node.js & Express server serving a clean HTML/JS interface.
+- **Real-time Chat**: Interactive chat interface for communicating with the AI.
 
-## Project Overview
+## 🛠️ Tech Stack
 
-Build a full-stack chat application using:
+- **Backend**
+  - [Python](https://www.python.org/) (3.8+)
+  - [FastAPI](https://fastapi.tiangolo.com/) - Web framework
+  - [Uvicorn](https://www.uvicorn.org/) - ASGI server
+  - [Groq Python SDK](https://console.groq.com/docs/libraries/python) - AI inference
+  - [Python-dotenv](https://pypi.org/project/python-dotenv/) - Environment management
 
-* **Backend**: FastAPI (Python)
-* **Frontend**: Node.js (Express + HTML/CSS/JS)
-* **AI**: Claude via official Claude Code SDK
+- **Frontend**
+  - [Node.js](https://nodejs.org/) & [Express](https://expressjs.com/)
+  - Vanilla HTML, CSS, JavaScript
 
-Architecture:
+## 📋 Prerequisites
 
-```
-Node.js Frontend → FastAPI Backend → Claude SDK → Claude Model
-```
+Before running the application, ensure you have the following installed:
+- **Python 3.8+**
+- **Node.js** (v14 or higher) & **npm**
+- A **Groq API Key** (Get one at [console.groq.com](https://console.groq.com/))
 
-## 🗂️ Project Folder Structure
+## ⚙️ Installation & Setup
+
+### 1. Backend Setup
+
+1.  Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+
+2.  Create a virtual environment (optional but recommended):
+    ```bash
+    python -m venv venv
+    # Windows
+    venv\Scripts\activate
+    # macOS/Linux
+    source venv/bin/activate
+    ```
+
+3.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  Set up environment variables:
+    Create a `.env` file in the `backend/` directory and add your Groq API key:
+    ```env
+    GROQ_API_KEY=your_groq_api_key_here
+    ```
+
+5.  Run the backend server:
+    ```bash
+    uvicorn app.main:app --reload
+    ```
+    The API will be available at `http://localhost:8000`.
+
+### 2. Frontend Setup
+
+1.  Open a new terminal and navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3.  Start the frontend server:
+    ```bash
+    npm start
+    ```
+    Or manually:
+    ```bash
+    node server.js
+    ```
+
+4.  Access the application:
+    Open your browser and visit `http://localhost:3000`.
+
+## 📁 Project Structure
+
 ```
 claude-chat-app/
-│
-├── backend/                     # FastAPI backend
+├── backend/                # FastAPI Backend
 │   ├── app/
-│   │   ├── api/
-│   │   │   └── chat.py           # /chat API route
-│   │   │
-│   │   ├── services/
-│   │   │   └── claude_service.py # Claude SDK integration
-│   │   │
-│   │   ├── models/
-│   │   │   └── schemas.py        # Request/response schemas
-│   │   │
-│   │   ├── core/
-│   │   │   └── config.py         # Environment & config
-│   │   │
-│   │   └── main.py               # FastAPI app entry point
-│   │
-│   ├── .env                      # Claude API key
-│   ├── requirements.txt          # Python dependencies
-│   └── README.md                 # Backend documentation
+│   │   ├── api/            # API Routes (chat.py)
+│   │   ├── services/       # AI Services (groq_service.py)
+│   │   └── main.py         # App Entry Point
+│   ├── requirements.txt    # Python Dependencies
+│   └── .env                # Env Variables (GitIgnored)
 │
-├── frontend/                     # Node.js frontend
-│   ├── public/
-│   │   ├── index.html            # Chat UI
-│   │   ├── style.css
-│   │   └── script.js             # Frontend logic
-│   │
-│   ├── server.js                 # Node.js Express server
-│   ├── package.json
-│   └── README.md                 # Frontend documentation
+├── frontend/               # Node.js Frontend
+│   ├── public/             # Static Assets (HTML/CSS/JS)
+│   ├── server.js           # Express Server
+│   └── package.json        # Node Dependencies
 │
-└── README.md                     # Overall project documentation
+└── README.md               # Project Documentation
 ```
----
 
-## Task-Based Execution Plan
+## 📝 Usage
 
-### 🔹 Task 1: Project Initialization
-
-**Goal**: Create base project structure.
-
-Steps:
-
-1. Create root folder: `claude-chat-app`
-2. Create folders:
-
-   * `backend/`
-   * `frontend/`
-3. Inside backend, create:
-
-   * `app/api/`
-   * `app/services/`
-   * `app/models/`
-   * `app/core/`
-
-✅ Output:
-
-* Folder structure ready
-
----
-
-### 🔹 Task 2: Backend Environment Setup (FastAPI)
-
-**Goal**: Prepare Python environment and dependencies.
-
-Steps:
-
-1. Create `backend/requirements.txt`
-2. Add dependencies:
-
-   * fastapi
-   * uvicorn
-   * python-dotenv
-   * anthropic
-3. Install dependencies
-4. Create `.env` file with Claude API key
-
-✅ Output:
-
-* FastAPI environment ready
-
----
-
-### 🔹 Task 3: FastAPI App Entry Point
-
-**Goal**: Create basic FastAPI app and health check.
-
-Steps:
-
-1. Create `app/main.py`
-2. Initialize FastAPI app
-3. Add a `/` health-check endpoint
-4. Run server using uvicorn
-
-✅ Output:
-
-* FastAPI server running
-* Swagger UI accessible
-
----
-
-### 🔹 Task 4: Define API Schemas
-
-**Goal**: Define request/response models.
-
-Steps:
-
-1. Create `app/models/schemas.py`
-2. Define:
-
-   * `ChatRequest` (message: str)
-   * `ChatResponse` (reply: str)
-
-✅ Output:
-
-* Pydantic models ready
-
----
-
-### 🔹 Task 5: Claude SDK Integration
-
-**Goal**: Integrate Claude using official SDK.
-
-Steps:
-
-1. Create `app/services/claude_service.py`
-2. Initialize Claude client using API key
-3. Implement function to send user message
-4. Return Claude-generated response
-
-✅ Output:
-
-* Claude service layer ready
-
----
-
-### 🔹 Task 6: Chat API Endpoint
-
-**Goal**: Expose `/chat` API.
-
-Steps:
-
-1. Create `app/api/chat.py`
-2. Define POST `/chat` endpoint
-3. Accept user message
-4. Call Claude service
-5. Return response
-6. Handle errors properly
-
-✅ Output:
-
-* Working `/chat` API
-
----
-
-### 🔹 Task 7: Connect API Router
-
-**Goal**: Register routes with FastAPI app.
-
-Steps:
-
-1. Import chat router into `main.py`
-2. Include router in app
-3. Test endpoint via Swagger UI
-
-✅ Output:
-
-* Backend fully functional
-
----
-
-### 🔹 Task 8: Frontend Setup (Node.js)
-
-**Goal**: Initialize frontend server.
-
-Steps:
-
-1. Create `frontend/package.json`
-2. Install Express
-3. Create `server.js`
-4. Serve static files
-
-✅ Output:
-
-* Node.js server running
-
----
-
-### 🔹 Task 9: Frontend UI Creation
-
-**Goal**: Build basic chat UI.
-
-Steps:
-
-1. Create `public/index.html`
-2. Add input field and send button
-3. Create `style.css` for layout
-4. Create `script.js` for logic
-
-✅ Output:
-
-* Chat UI visible in browser
-
----
-
-### 🔹 Task 10: Frontend–Backend Integration
-
-**Goal**: Connect UI to FastAPI backend.
-
-Steps:
-
-1. Send POST request from frontend to `/chat`
-2. Display user message
-3. Display Claude response
-4. Handle loading and errors
-
-✅ Output:
-
-* End-to-end chat working
-
----
-
-### 🔹 Task 11: Validation & Error Handling
-
-**Goal**: Improve robustness.
-
-Steps:
-
-1. Validate empty messages
-2. Handle backend failures
-3. Show user-friendly errors
-
-✅ Output:
-
-* Stable application
-
----
-
-### 🔹 Task 12: Documentation
-
-**Goal**: Make project easy to understand.
-
-Steps:
-
-1. Document setup steps
-2. Explain architecture
-3. Explain Claude SDK usage
-
-✅ Output:
-
-* Final README ready
-
----
-
-## How to Use This in Claude Code
-
-* Run **one task at a time**
-* If session reloads, resume from the last completed task
-* Refer to task number instead of re-explaining context
-
-Example prompt:
-
-> "Implement Task 5: Claude SDK Integration"
-
----
-
-## Final Result
-
-A production-style, full-stack Claude-powered chat application built **incrementally and reliably**.
+1.  Ensure both the backend (`localhost:8000`) and frontend (`localhost:3000`) servers are running.
+2.  Go to `http://localhost:3000` in your web browser.
+3.  Type a message in the chat input and visualize the high-speed response from Groq!
