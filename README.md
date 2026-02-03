@@ -1,4 +1,4 @@
-# Claude Chat App
+# Claude Chat Application
 A full-stack chat application built with **FastAPI** (Backend) and **Node.js/Express** (Frontend). This project has used  **Groq API** , insted of Anthropic Claude API because Groq API is free to use.
 
 ## 🚀 Features
