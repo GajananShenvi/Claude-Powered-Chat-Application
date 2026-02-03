@@ -8,6 +8,7 @@ Node.js + Express frontend for the Claude Chat application.
    ```bash
    npm install
    ```
+   With this all the node modules will get get installed
 
 ## Running
 
@@ -17,3 +18,4 @@ node server.js
 ```
 
 The UI will be available at http://localhost:3000.
+
