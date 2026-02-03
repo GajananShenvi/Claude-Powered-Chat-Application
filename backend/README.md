@@ -2,6 +2,11 @@
 
 FastAPI backend for the Claude Chat application.
 
+Hear in backend you will have to create an .env file and add your,  
+ANTHROPIC_API_KEY=your_claude_api_key_here
+or (in case if you are using any other api)
+GROQ_API_KEY = your_groq_api_key_hear
+
 ## Setup
 
 1. Create a virtual environment:
@@ -34,3 +39,4 @@ uvicorn app.main:app --reload
 
 The API will be available at http://localhost:8000.
 Docs available at http://localhost:8000/docs.
+
